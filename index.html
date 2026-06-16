@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chris Turin — Technical Support & DevOps Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0D1117;
+      --bg2:       #161B22;
+      --bg3:       #1C2128;
+      --border:    #30363D;
+      --teal:      #00C9B0;
+      --teal-dim:  #00877A;
+      --white:     #E8EDF2;
+      --gray:      #8B949E;
+      --gray-dim:  #484F58;
+      --purple:    #7C3AED;
+      --mono:      'JetBrains Mono', monospace;
+      --sans:      'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(13,17,23,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--teal);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 7rem 2rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-prompt {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--teal-dim);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-prompt span { color: var(--gray-dim); }
+
+    h1 {
+      font-family: var(--mono);
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    h1 .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.9em;
+      background: var(--teal);
+      margin-left: 4px;
+      vertical-align: middle;
+      animation: blink 1.1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-titles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      border: 1px solid;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    .badge-teal  { color: var(--teal);   border-color: var(--teal-dim);   background: rgba(0,201,176,0.07); }
+    .badge-gray  { color: var(--gray);   border-color: var(--gray-dim);   background: transparent; }
+    .badge-purple { color: #A78BFA; border-color: #5B3FA8; background: rgba(124,58,237,0.08); }
+
+    .hero-description {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .hero-description strong { color: var(--white); font-weight: 500; }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: #0D1117;
+      border-color: var(--teal);
+    }
+
+    .btn-primary:hover {
+      background: #00E5CE;
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gray);
+      background: var(--bg2);
+      text-decoration: none;
+    }
+
+    /* ── METRICS STRIP ── */
+    .metrics {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 2rem;
+    }
+
+    .metrics-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .metrics-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--teal-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .metric-card {
+      background: var(--bg2);
+      padding: 1.5rem 1.75rem;
+      position: relative;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--teal);
+      opacity: 0.4;
+    }
+
+    .metric-value {
+      font-family: var(--mono);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .metric-name {
+      font-size: 0.78rem;
+      color: var(--gray);
+      line-height: 1.4;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-body {
+      color: var(--gray);
+      font-size: 0.975rem;
+      line-height: 1.75;
+      max-width: 640px;
+    }
+
+    .section-body strong { color: var(--white); font-weight: 500; }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      border-color: var(--teal-dim);
+      transform: translateY(-2px);
+    }
+
+    .project-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.84rem;
+      color: var(--gray);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      background: var(--bg3);
+      color: var(--gray);
+      border: 1px solid var(--border);
+    }
+
+    .project-link {
+      font-size: 0.8rem;
+      color: var(--teal);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .project-link:hover { text-decoration: underline; }
+
+    /* ── STACK ── */
+    .stack-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .stack-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .stack-group:last-child { margin-bottom: 0; }
+
+    .stack-group-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--teal-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .stack-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .stack-tag {
+      font-size: 0.82rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      background: var(--bg3);
+      color: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: border-color 0.2s;
+    }
+
+    .contact-item:hover { border-color: var(--teal-dim); text-decoration: none; }
+
+    .contact-icon { font-size: 1.2rem; }
+
+    .contact-label {
+      font-size: 0.72rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-family: var(--mono);
+    }
+
+    .contact-value {
+      font-size: 0.88rem;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--gray-dim);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1.25rem; }
+      .hero { padding: 6rem 1rem 3rem; }
+      section { padding: 3.5rem 1rem; }
+      .metrics { padding: 2.5rem 1rem; }
+      h1 { font-size: 2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor { animation: none; }
+      .project-card { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">~/christurin</span>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:7rem;">
+  <p class="hero-prompt"><span>$ </span>whoami</p>
+  <h1>Chris Turin<span class="cursor"></span></h1>
+
+  <div class="hero-titles">
+    <span class="badge badge-teal">Technical Support Engineer</span>
+    <span class="badge badge-purple">DevOps Engineer</span>
+    <span class="badge badge-gray">Sunrise, FL · EST</span>
+  </div>
+
+  <p class="hero-description">
+    I debug API integrations end-to-end, build infrastructure that monitors itself,
+    and document failures so the next engineer finds the answer before they finish writing the ticket.
+    <strong>2.5 years, 5 clients, 100% retention.</strong>
+  </p>
+
+  <div class="hero-cta">
+    <a href="mailto:christurin01@gmail.com" class="btn btn-primary">Get in touch</a>
+    <a href="https://github.com/CTURIN01" target="_blank" rel="noopener" class="btn btn-secondary">GitHub ↗</a>
+    <a href="https://linkedin.com/in/christurin" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn ↗</a>
+  </div>
+</section>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metrics-inner">
+    <p class="metrics-label">// production stats</p>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-value">5</div>
+        <div class="metric-name">Concurrent B2B SaaS clients retained across 2.5 years</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">100%</div>
+        <div class="metric-name">Client retention rate — not one engagement lost</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">&lt;1hr</div>
+        <div class="metric-name">Repeat issue resolution time, down from 4–5 hours via runbooks</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">23s</div>
+        <div class="metric-name">Kubernetes pod recovery time after MySQL failure, documented with Grafana</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">7</div>
+        <div class="metric-name">Plaid API error flows documented with root cause and resolution path</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">70+</div>
+        <div class="metric-name">GitHub commits in 2026 across 4 active repos</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-eyebrow">// about</p>
+    <h2>Support engineer who builds what they support.</h2>
+    <p class="section-body">
+      Most support engineers escalate to engineering and wait.
+      I deployed the <strong>Kubernetes cluster</strong>, wrote the manifests from scratch,
+      configured <strong>Prometheus alerting</strong> and <strong>Grafana dashboards</strong>,
+      and documented what breaks and why.
+      When I tell an engineer that a readiness probe failed within 10 seconds and traffic stopped routing,
+      I know what that means from both sides of the conversation.
+      <br><br>
+      Currently targeting <strong>Technical Support Engineer</strong>, <strong>Developer Support Engineer</strong>,
+      and <strong>Cloud Support Engineer</strong> roles at fintech,
+      developer-tooling, and observability companies.
+      B.S. Computer Science in progress at Florida Atlantic University.
+    </p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--bg); padding-top:0;">
+  <div class="section-inner">
+    <p class="section-eyebrow">// projects</p>
+    <h2>Built, broken, and documented.</h2>
+
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">⚙️</div>
+        <div class="project-name">DevOps Portfolio — Live GitOps Pipeline</div>
+        <div class="project-desc">
+          Argo CD v3.4.3 syncing from GitHub to Kubernetes with selfHeal and auto-pruning.
+          All manifests written from scratch. Django REST API with MySQL using initContainers,
+          readiness/liveness probes, and resource limits. Prometheus + Grafana observability stack.
+          Documented failure scenarios with exact recovery timelines.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Argo CD</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Prometheus</span>
+          <span class="tag">Grafana</span>
+          <span class="tag">Terraform</span>
+          <span class="tag">AWS</span>
+          <span class="tag">GitHub Actions</span>
+        </div>
+        <a href="https://github.com/CTURIN01/devops-portfolio" target="_blank" rel="noopener" class="project-link">View repo ↗</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🏦</div>
+        <div class="project-name">PostgreSQL Fintech Database</div>
+        <div class="project-desc">
+          Normalized schema modeling KYC status, multi-account balances, transaction history,
+          and fraud flags across 4 joined tables. 10 analytical queries across 6 query types.
+          500 mock transactions seeded with generate_series. EXPLAIN ANALYZE optimization.
+          Versioned troubleshooting runbook in repo.
+        </div>
+        <div class="project-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Bash</span>
+          <span class="tag">GitHub Actions</span>
+        </div>
+        <a href="https://github.com/CTURIN01/project-postgresql" target="_blank" rel="noopener" class="project-link">View repo ↗</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🔗</div>
+        <div class="project-name">Plaid Sandbox Integration</div>
+        <div class="project-desc">
+          Complete OAuth and MFA flow across 4 API endpoints. 7 documented error flows
+          each with root cause, reproduction steps, and resolution path — including a
+          webhook-gated retry pattern for PRODUCT_NOT_READY using INITIAL_UPDATE
+          before calling transactionsSync.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">OAuth</span>
+          <span class="tag">Webhooks</span>
+          <span class="tag">Postman</span>
+          <span class="tag">REST API</span>
+        </div>
+        <a href="https://github.com/CTURIN01/plaid-sandbox-integration" target="_blank" rel="noopener" class="project-link">View repo ↗</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">📋</div>
+        <div class="project-name">Hybrid Cloud Incident Runbook</div>
+        <div class="project-desc">
+          Production-grade incident response documentation across AWS and GCP environments.
+          SEV-1/2/3 triage checklists, communication templates, recovery procedures,
+          and a filled postmortem template. Built after provisioning symmetric
+          AWS and GCP VPC infrastructure with Terraform.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Terraform</span>
+          <span class="tag">AWS</span>
+          <span class="tag">GCP</span>
+          <span class="tag">Incident Response</span>
+        </div>
+        <a href="https://github.com/CTURIN01/devops-portfolio" target="_blank" rel="noopener" class="project-link">View repo ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack" class="stack-section">
+  <div class="section-inner">
+    <p class="section-eyebrow">// stack</p>
+    <h2>Tools with project evidence.</h2>
+
+    <div style="margin-top:2rem;">
+      <div class="stack-group">
+        <div class="stack-group-label">APIs & Integration</div>
+        <div class="stack-tags">
+          <span class="stack-tag">REST APIs</span>
+          <span class="stack-tag">OAuth 2.0</span>
+          <span class="stack-tag">JWT</span>
+          <span class="stack-tag">Webhooks</span>
+          <span class="stack-tag">JSON</span>
+          <span class="stack-tag">Postman</span>
+          <span class="stack-tag">curl</span>
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <div class="stack-group-label">GitOps & Kubernetes</div>
+        <div class="stack-tags">
+          <span class="stack-tag">Argo CD</span>
+          <span class="stack-tag">Kubernetes</span>
+          <span class="stack-tag">Helm</span>
+          <span class="stack-tag">Docker</span>
+          <span class="stack-tag">GitHub Actions</span>
+          <span class="stack-tag">GHCR</span>
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <div class="stack-group-label">Observability</div>
+        <div class="stack-tags">
+          <span class="stack-tag">Prometheus</span>
+          <span class="stack-tag">Grafana</span>
+          <span class="stack-tag">PromQL</span>
+          <span class="stack-tag">Alerting Rules</span>
+          <span class="stack-tag">Log Analysis</span>
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <div class="stack-group-label">Cloud & Infrastructure</div>
+        <div class="stack-tags">
+          <span class="stack-tag">AWS</span>
+          <span class="stack-tag">GCP</span>
+          <span class="stack-tag">Terraform</span>
+          <span class="stack-tag">EC2</span>
+          <span class="stack-tag">ECS</span>
+          <span class="stack-tag">RDS</span>
+          <span class="stack-tag">IAM</span>
+          <span class="stack-tag">VPC</span>
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <div class="stack-group-label">Database</div>
+        <div class="stack-tags">
+          <span class="stack-tag">PostgreSQL</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">SQL</span>
+          <span class="stack-tag">EXPLAIN ANALYZE</span>
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <div class="stack-group-label">Languages</div>
+        <div class="stack-tags">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">Bash</span>
+          <span class="stack-tag">SQL</span>
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <div class="stack-group-label">Support & Documentation</div>
+        <div class="stack-tags">
+          <span class="stack-tag">Zendesk</span>
+          <span class="stack-tag">Jira</span>
+          <span class="stack-tag">Runbooks</span>
+          <span class="stack-tag">Postmortems</span>
+          <span class="stack-tag">Knowledge Base</span>
+          <span class="stack-tag">Root Cause Analysis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-eyebrow">// contact</p>
+    <h2>Let's talk.</h2>
+    <p class="section-body">
+      Open to Technical Support Engineer, Developer Support Engineer,
+      Cloud Support Engineer, and Implementation Engineer roles.
+      Remote. Eastern Time Zone. Available immediately.
+    </p>
+
+    <div class="contact-grid">
+      <a href="mailto:christurin01@gmail.com" class="contact-item">
+        <span class="contact-icon">✉️</span>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">christurin01@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/christurin" target="_blank" rel="noopener" class="contact-item">
+        <span class="contact-icon">💼</span>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">in/christurin</div>
+        </div>
+      </a>
+      <a href="https://github.com/CTURIN01" target="_blank" rel="noopener" class="contact-item">
+        <span class="contact-icon">🐙</span>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">CTURIN01</div>
+        </div>
+      </a>
+      <div class="contact-item" style="cursor:default;">
+        <span class="contact-icon">📍</span>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Sunrise, FL · EST</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>Chris Turin · 2026 · Built with HTML, CSS, and discipline</span>
+</footer>
+
+</body>
+</html>
